@@ -35,3 +35,14 @@ fn main() {
     println!("Part 1: {ans1}");
     println!("Part 2: {ans2}");
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::*;
+    #[test]
+    fn it_works() {
+        let dat = parse_input("data/test-input-d01.txt");
+        assert_eq!(part1(&dat), 24000);
+        assert_eq!(part2(&dat), 45000);
+    }
+}
