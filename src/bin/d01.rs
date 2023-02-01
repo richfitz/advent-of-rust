@@ -18,12 +18,20 @@ fn parse_input(filename: &str) -> Vec<i32> {
     ret
 }
 
-fn part1(data: Vec<i32>) -> i32 {
+fn part1(data: &Vec<i32>) -> i32 {
     return *data.iter().max().unwrap();
+}
+
+fn part2(data: &Vec<i32>) -> i32 {
+    let mut data = data.clone();
+    data.sort_by(|a, b| b.cmp(a));
+    data[0] + data[1] + data[2]
 }
 
 fn main() {
     let dat = parse_input("data/input-d01.txt");
-    let ans1 = part1(dat);
+    let ans1 = part1(&dat);
+    let ans2 = part2(&dat);
     println!("Part 1: {ans1}");
+    println!("Part 2: {ans2}");
 }
