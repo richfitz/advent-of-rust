@@ -18,12 +18,12 @@ fn parse_input(filename: &str) -> Vec<i32> {
     ret
 }
 
-fn part1(data: &Vec<i32>) -> i32 {
+fn part1(data: &[i32]) -> i32 {
     return *data.iter().max().unwrap();
 }
 
 fn part2(data: &Vec<i32>) -> i32 {
-    let mut data = data.clone();
+    let mut data = data.to_owned();
     data.sort_by(|a, b| b.cmp(a));
     data[0] + data[1] + data[2]
 }
