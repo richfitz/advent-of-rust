@@ -26,12 +26,9 @@ fn parse_line(s: &str) -> Round {
 
 fn parse_el(c: char) -> i32 {
     match c {
-        'A' => 0,
-        'B' => 1,
-        'C' => 2,
-        'X' => 0,
-        'Y' => 1,
-        'Z' => 2,
+        'A' | 'X' => 0,
+        'B' | 'Y' => 1,
+        'C' | 'Z' => 2,
         _ => panic!("invalid entry")
     }
 }
