@@ -6,9 +6,11 @@ struct Round {
     us: i32,
 }
 
-fn parse_input(filename: &str) -> Vec<Round> {
+type Match = Vec<Round>;
+
+fn parse_input(filename: &str) -> Match {
     let file = File::open(filename).unwrap();
-    let mut ret: Vec<Round> = Vec::new();
+    let mut ret: Match = Vec::new();
     for line in io::BufReader::new(file).lines() {
         ret.push(parse_line(&line.unwrap()));
     }
@@ -30,11 +32,11 @@ fn parse_el(c: char) -> i32 {
         'X' => 0,
         'Y' => 1,
         'Z' => 2,
-        _ => panic!("wtf")
+        _ => panic!("invalid entry")
     }
 }
 
-fn part1(data: &Vec<Round>) -> i32 {
+fn part1(data: &Match) -> i32 {
     let mut ret = 0;
     for d in data {
         ret += ((d.us - d.them + 1).rem_euclid(3)) * 3 + d.us + 1;
@@ -42,7 +44,7 @@ fn part1(data: &Vec<Round>) -> i32 {
     ret
 }
 
-fn part2(data: &Vec<Round>) -> i32 {
+fn part2(data: &Match) -> i32 {
     let mut ret = 0;
     for d in data {
         ret += d.us * 3 + (d.them + d.us - 1).rem_euclid(3) + 1;
