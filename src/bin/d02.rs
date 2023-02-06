@@ -19,7 +19,7 @@ fn parse_input(filename: &str) -> Match {
 
 fn parse_line(s: &str) -> Round {
     Round {
-        them: parse_el(s.chars().nth(0).unwrap()),
+        them: parse_el(s.chars().next().unwrap()),
         us: parse_el(s.chars().nth(2).unwrap())
     }
 }
@@ -37,19 +37,15 @@ fn parse_el(c: char) -> i32 {
 }
 
 fn part1(data: &Match) -> i32 {
-    let mut ret = 0;
-    for d in data {
-        ret += ((d.us - d.them + 1).rem_euclid(3)) * 3 + d.us + 1;
-    }
-    ret
+    data.iter()
+        .map(|d| ((d.us - d.them + 1).rem_euclid(3)) * 3 + d.us + 1)
+        .sum()
 }
 
 fn part2(data: &Match) -> i32 {
-    let mut ret = 0;
-    for d in data {
-        ret += d.us * 3 + (d.them + d.us - 1).rem_euclid(3) + 1;
-    }
-    ret
+    data.iter()
+        .map(|d| d.us * 3 + (d.them + d.us - 1).rem_euclid(3) + 1)
+        .sum()
 }
 
 fn main() {
