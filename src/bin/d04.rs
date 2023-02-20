@@ -19,15 +19,18 @@ fn is_overlapping(p: &Pair) -> bool {
     p.a.0 <= p.b.1 && p.a.1 >= p.b.0
 }
 
-fn count_if(data: &[Pair], f: impl Fn(&Pair) -> bool) -> u32 {
-    data.iter().map(|el| f(el) as u32).sum()
+fn count_if(data: &[Pair], f: impl Fn(&Pair) -> bool) -> usize {
+    data.iter()
+        .map(f)
+        .filter(|el| *el)
+        .count()
 }
 
-fn part1(data: &[Pair]) -> u32 {
+fn part1(data: &[Pair]) -> usize {
     count_if(data, is_fully_contained)
 }
 
-fn part2(data: &[Pair]) -> u32 {
+fn part2(data: &[Pair]) -> usize {
     count_if(data, is_overlapping)
 }
 
