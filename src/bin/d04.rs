@@ -1,6 +1,3 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-
 struct Pair {
     a: (i32, i32),
     b: (i32, i32),
@@ -12,14 +9,6 @@ fn parse_line(s: &str) -> Pair {
     let a = (digits.next().unwrap(), digits.next().unwrap());
     let b = (digits.next().unwrap(), digits.next().unwrap());
     Pair { a, b }
-}
-
-fn parse_input(filename: &str) -> Vec<Pair> {
-    let file = File::open(filename).unwrap();
-    io::BufReader::new(file)
-        .lines()
-        .map(|line| parse_line(&line.unwrap()))
-        .collect()
 }
 
 fn is_fully_contained(p: &Pair) -> bool {
@@ -43,7 +32,7 @@ fn part2(data: &[Pair]) -> u32 {
 }
 
 fn main() {
-    let dat = parse_input("data/input-d04.txt");
+    let dat = aoc::parse_input("data/input-d04.txt", parse_line);
     let ans1 = part1(&dat);
     let ans2 = part2(&dat);
     println!("Part 1: {ans1}");
